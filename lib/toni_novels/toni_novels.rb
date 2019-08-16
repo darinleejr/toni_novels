@@ -1,6 +1,2 @@
-require "toni_novels/version"
-
-module ToniNovels
-  class Error < StandardError; end
-  # Your code goes here...
-end
+require_relative "./toni_novels/version"
+require_relative './toni_novels/cli'
