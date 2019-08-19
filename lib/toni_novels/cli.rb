@@ -9,12 +9,14 @@ class ToniNovels
 
     def list_books
       puts "List of Novels:"
-      puts <<~DOC
-        1. Beloved by Toni Morrison - $32.00
-        2. Sula by Toni Morrison - $19.84
-        3. The Bluest Eyes by Toni Morrison - $19.43
-      DOC
-      @allbooks = ToniNovels::AllBooks.now
+      # puts <<~DOC
+      #   1. Beloved by Toni Morrison - $32.00
+      #   2. Sula by Toni Morrison - $19.84
+      #   3. The Bluest Eyes by Toni Morrison - $19.43
+      # DOC
+
+      require_relative './all-books'
+      @allbooks = AllBooks.now
     end
 
     def menu
