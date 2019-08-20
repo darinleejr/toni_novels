@@ -20,7 +20,7 @@ class AllNovels
   end
 
   def self.scrape_tonim
-    doc = Nokogiri::HTML(open("https://"))
+    doc = Nokogiri::HTML(open("https://www.bookseriesinorder.com/toni-morrison/"))
     binding.pry
   end
 end
