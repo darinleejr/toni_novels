@@ -17,7 +17,7 @@ class ToniNovels
 
       require_relative './all-books'
       @allnovels = AllNovels.now
-      @allnovels.each_with_index(1) do |novel, i|
+      @allnovels.each_with_index() do |novel, i|
         puts "#{i}. #{novel.name} - #{novel.price} - #{novel.availability}"
       end
     end
@@ -29,7 +29,8 @@ class ToniNovels
         input = gets.strip.downcase
 
         if input.to_i > 0
-          puts @allnovels[input.to_i-1]
+          the_novel = @allnovels[input.to_i-1]
+          puts "#{i}. #{novel.name} - #{novel.price} - #{novel.availability}"
         elsif input == "list"
           list_novels
         elsif input != "exit"
@@ -54,5 +55,4 @@ class ToniNovels
     def goodbye
       puts "Didn't find what you were looking for? Well come back and visit some time soon for more Toni Morrision Books!"
     end
-
 end
