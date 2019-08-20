@@ -1,4 +1,4 @@
-class ToniNovels
+class ToniNovels::CLI
 
     def call
       puts "Welcome to Toni Morrison's Bookstore!"
@@ -16,8 +16,8 @@ class ToniNovels
       # DOC
 
       require_relative './all-books'
-      @allnovels = AllNovels.today
-      @allnovels.each_with_index() do |novel, i|
+      @allnovels = ToniNovels::AllNovels.today
+      @allnovels.each.with_index() do |novel, i|
         puts "#{i}. #{novel.name} - #{novel.price} - #{novel.availability}"
       end
     end

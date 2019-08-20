@@ -47,7 +47,7 @@ class AllNovels
     novel.availability = true
   end
 
-  def self.beloved
+  def self.scrape_beloved
     #Alt website: https://www.amazon.com/gp/product/
     doc = Nokogiri::HTML(open("https://www.bookseriesinorder.com/toni-morrison/"))
 

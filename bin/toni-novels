@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require './lib/toni_novel/cli'
+require './lib/toni_novel/toni_novels'
 
-ToniNovels.new.call
+ToniNovels::CLI.new.call
