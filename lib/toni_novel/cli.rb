@@ -16,7 +16,7 @@ class ToniNovels
       # DOC
 
       require_relative './all-books'
-      @allnovels = AllNovels.now
+      @allnovels = AllNovels.today
       @allnovels.each_with_index() do |novel, i|
         puts "#{i}. #{novel.name} - #{novel.price} - #{novel.availability}"
       end
