@@ -2,12 +2,12 @@ class ToniNovels
 
     def call
       puts "Welcome to Toni Morrison's Bookstore!"
-      list_books
+      list_novels
       menu
       goodbye
     end
 
-    def list_books
+    def list_novels
       puts "List of Novels:"
       # puts <<~DOC
       #   1. Beloved by Toni Morrison - $32.00
@@ -16,7 +16,10 @@ class ToniNovels
       # DOC
 
       require_relative './all-books'
-      @allbooks = AllBooks.now
+      @allnovels = AllNovels.now
+      @allnovels.each_with_index(1) do |novel, i|
+        puts "#{i}. #{novel.name} - #{novel.price} - #{novel.availability}"
+      end
     end
 
     def menu
@@ -25,17 +28,25 @@ class ToniNovels
       while input != "exit"
         input = gets.strip.downcase
 
-        case input
-        when "1"
-          puts "More info on deal 1..."
-        when "2"
-          puts "More info on deal 2..."
-        when "3"
-          puts "More info on deal 3..."
-        when "list"
-          list_books
-        else
-          puts "Type 1-3, list, or exit. Please."
+        if input.to_i > 0
+          puts @allnovels[input.to_i-1]
+        elsif input == "list"
+          list_novels
+        elsif input != "exit"
+          puts "Options: Type 1-3, list, or exit. Please."
+
+        # case input
+        # when "1"
+        #   puts "More info on deal 1..."
+        # when "2"
+        #   puts "More info on deal 2..."
+        # when "3"
+        #   puts "More info on deal 3..."
+        # when "list"
+        #   list_books
+        # else
+        #   puts "Options: Type 1-3, list, or exit. Please."
+        #
         end
       end
     end

@@ -1,4 +1,4 @@
-class AllBooks
+class AllNovels
   attr_accessor :name, :price, :availability, :url
 
   def self.now
@@ -13,7 +13,7 @@ class AllBooks
     novel_1.price = $20
     novel_1.availability = true
     novel_1.url = "https://www.amazon.com/gp/product/0375411550/ref=as_li_ss_tl?ie=UTF8&tag=bsio-20&linkCode=as2&camp=217145&creative=399369&creativeASIN=0375411550"
-    
+
     novel_2 = self.new
     novel_2.name = "Sula"
     novel_2.price = $20
