@@ -15,12 +15,37 @@ class AllNovels
     novels = []
 
     novels << self.scrape_toni
+    
 
     novels
   end
 
   def self.scrape_tonim
+    #Alt website: https://www.amazon.com/gp/product/
     doc = Nokogiri::HTML(open("https://www.bookseriesinorder.com/toni-morrison/"))
+
+
+    #Alt website: https://www.amazon.com/gp/product/0375411550/
+    #The Bluest Eye
+    novel.name = doc.search("span.productTitle").text
+    novel.price = doc.search("span.a-size-base a-color-price a-color-price").text
+    novel.url = doc.search("a.0375411550").first.attr("href")
+    novel.availability = true
+
+    #Alt website: https://www.amazon.com/gp/product/0375415351/
+    #Sula
+    novel.name = doc.search("span.productTitle").text
+    novel.price = doc.search("span.a-size-base a-color-price a-color-price").text
+    novel.url = doc.search("a.0375415351").first.attr("href")
+    novel.availability = true
+
+    #Alt website: https://www.amazon.com/gp/product/0394535979/
+    #Beloved
+    novel.name = doc.search("span.productTitle").text
+    novel.price = doc.search("span.a-size-base a-color-price a-color-price").text
+    novel.url = doc.search("a.0394535979").first.attr("href")
+    novel.availability = true
+
     binding.pry
   end
 end
