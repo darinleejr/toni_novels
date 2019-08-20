@@ -2,7 +2,7 @@ class AllNovels
   attr_accessor :name, :price, :availability, :url
 
   def self.today
-    self.scrape_toni
+    self.scrape_novels
   end
 
     # puts <<~DOC
@@ -11,39 +11,52 @@ class AllNovels
     #   3. Beloved by Toni Morrison - $32.00
     # DOC
 
-  def self.scrape_toni
+  def self.scrape_novels
     novels = []
 
-    novels << self.scrape_toni
-    
+    novels << self.scrape_tbe
+    novels << self.scrape_sula
+    novels << self.scrape_beloved
 
     novels
   end
 
-  def self.scrape_tonim
+  def self.scrape_tbe
     #Alt website: https://www.amazon.com/gp/product/
     doc = Nokogiri::HTML(open("https://www.bookseriesinorder.com/toni-morrison/"))
 
-
+    novel = self.new
     #Alt website: https://www.amazon.com/gp/product/0375411550/
     #The Bluest Eye
-    novel.name = doc.search("span.productTitle").text
-    novel.price = doc.search("span.a-size-base a-color-price a-color-price").text
-    novel.url = doc.search("a.0375411550").first.attr("href")
+    novel.name = doc.search("span.productTitle").text.strip
+    novel.price = doc.search("span.a-size-base a-color-price a-color-price").text.strip
+    novel.url = doc.search("a.0375411550").first.attr("href").strip
     novel.availability = true
+  end
 
+  def self.scrape_sula
+    #Alt website: https://www.amazon.com/gp/product/
+    doc = Nokogiri::HTML(open("https://www.bookseriesinorder.com/toni-morrison/"))
+
+    novel = self.new
     #Alt website: https://www.amazon.com/gp/product/0375415351/
     #Sula
-    novel.name = doc.search("span.productTitle").text
-    novel.price = doc.search("span.a-size-base a-color-price a-color-price").text
-    novel.url = doc.search("a.0375415351").first.attr("href")
+    novel.name = doc.search("span.productTitle").text.strip
+    novel.price = doc.search("span.a-size-base a-color-price a-color-price").text.strip
+    novel.url = doc.search("a.0375415351").first.attr("href").strip
     novel.availability = true
+  end
 
+  def self.beloved
+    #Alt website: https://www.amazon.com/gp/product/
+    doc = Nokogiri::HTML(open("https://www.bookseriesinorder.com/toni-morrison/"))
+
+    novel self.new
     #Alt website: https://www.amazon.com/gp/product/0394535979/
     #Beloved
-    novel.name = doc.search("span.productTitle").text
-    novel.price = doc.search("span.a-size-base a-color-price a-color-price").text
-    novel.url = doc.search("a.0394535979").first.attr("href")
+    novel.name = doc.search("span.productTitle").text.strip
+    novel.price = doc.search("span.a-size-base a-color-price a-color-price").text.strip
+    novel.url = doc.search("a.0394535979").first.attr("href").strip
     novel.availability = true
 
     binding.pry
