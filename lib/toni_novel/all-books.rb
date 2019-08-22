@@ -1,4 +1,4 @@
-class AllNovels
+class ToniNovels::AllNovels
   attr_accessor :name, :price, :availability, :url
 
   def self.today
@@ -11,55 +11,27 @@ class AllNovels
     #   3. Beloved by Toni Morrison - $32.00
     # DOC
 
+  def price
+    @amazon_doc ||= Nokogiri::HTML(open(self.url))
+    novel.price = @amazon_doc.search('')
+  end
+
   def self.scrape_novels
-    novels = []
-
-    novels << self.scrape_tbe
-    novels << self.scrape_sula
-    novels << self.scrape_beloved
-
-    novels
-  end
-
-  def self.scrape_tbe
     #Alt website: https://www.amazon.com/gp/product/
     doc = Nokogiri::HTML(open("https://www.bookseriesinorder.com/toni-morrison/"))
+    novel_list = doc.search("tr")
 
-    novel = self.new
-    #Alt website: https://www.amazon.com/gp/product/0375411550/
-    #The Bluest Eye
-    novel.name = doc.search("span.productTitle").text.strip
-    novel.price = doc.search("span.a-size-base a-color-price a-color-price").text.strip
-    novel.url = doc.search("a.0375411550").first.attr("href").strip
-    novel.availability = true
-  end
+    novel_list.map do |novel_tr|
+      novel = self.new
+      #Alt website: https://www.amazon.com/gp/product/0394535979/
+      #Beloved
+      novel.name = novel_tr.search("td.booktitle").text.strip
 
-  def self.scrape_sula
-    #Alt website: https://www.amazon.com/gp/product/
-    doc = Nokogiri::HTML(open("https://www.bookseriesinorder.com/toni-morrison/"))
+      novel.url = novel_tr.search("a").first.attr("href").strip
 
-    novel = self.new
-    #Alt website: https://www.amazon.com/gp/product/0375415351/
-    #Sula
-    novel.name = doc.search("span.productTitle").text.strip
-    novel.price = doc.search("span.a-size-base a-color-price a-color-price").text.strip
-    novel.url = doc.search("a.0375415351").first.attr("href").strip
-    novel.availability = true
-  end
-
-  def self.scrape_beloved
-    #Alt website: https://www.amazon.com/gp/product/
-    doc = Nokogiri::HTML(open("https://www.bookseriesinorder.com/toni-morrison/"))
-
-    novel self.new
-    #Alt website: https://www.amazon.com/gp/product/0394535979/
-    #Beloved
-    novel.name = doc.search("span.productTitle").text.strip
-    novel.price = doc.search("span.a-size-base a-color-price a-color-price").text.strip
-    novel.url = doc.search("a.0394535979").first.attr("href").strip
-    novel.availability = true
-
-    binding.pry
+      novel.availability = true
+      novel
+    end
   end
 end
 

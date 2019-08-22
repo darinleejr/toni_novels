@@ -18,7 +18,7 @@ class ToniNovels::CLI
       require_relative './all-books'
       @allnovels = ToniNovels::AllNovels.today
       @allnovels.each.with_index() do |novel, i|
-        puts "#{i}. #{novel.name} - #{novel.price} - #{novel.availability}"
+        puts "#{i + 1}. #{novel.name} - #{novel.availability}"
       end
     end
 
